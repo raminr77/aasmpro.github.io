@@ -1,12 +1,72 @@
 import React, { useState, useEffect } from "react";
 
 import { LinkButtonName, LinkButton } from "../components/LinkButton";
+import { DetailButton } from "../components/DetailButton";
 import {
   aboutMeTranslations,
   experiencesTranslations,
   skillsTranslations,
 } from "../data";
 import { useTranslation } from "../utils/useTranslation";
+import { ContactBox } from "../components/ContactBox";
+
+const DetailComponent = ({ title, data = [], isBtn }) => {
+  if (data?.length) return null;
+  if(isBtn) {
+    return (
+      <div className="flex flex-row flex-wrap">
+        {data.map(({href, title}, index) => (
+          <LinkButton
+            key={title+index}
+            className="px-3 py-0.5 mx-1 my-1 font-bold print:text-light-0 print:text-sm print:px-2 print:py-0"
+            bgColor="bg-blue-0"
+            ringColor="ring-blue-0"
+            href={href}
+            text={title}
+          />
+        ))}
+      </div>
+    );
+  }
+  return (
+    <div className="mt-2 mb-2 print:text-sm text-justify">
+      <p className="font-bold">{title}</p>
+      <ul className="list-disc pl-4">
+        {data.map((item, index) => (
+          <li key={index}>{item}</li>
+        ))}
+      </ul>
+    </div>
+  )
+};
+
+const ToggleLanguageBtn = () => {
+  const translation = useTranslation();
+
+  return (
+    <span
+        className="mr-2 py-0.5 rounded-full text-dark-0 overflow-hidden
+    transition duration-300  hover:bg-black hover:ring-2 hover:ring-light-1 cursor-pointer"
+        onClick={translation.toggle}>
+        <span
+          className={`text-dark-0 px-1.5 py-0.5 transition duration-300 rounded-l-full ${
+            translation.isEnglish
+              ? "bg-light-1"
+              : "text-light-0 bg-dark-0"
+          }`}>
+          EN
+        </span>
+        <span
+          className={`text-dark-0 px-1.5 py-0.5 transition duration-300 rounded-r-full ${
+            translation.isGerman
+              ? "bg-light-1"
+              : "text-light-0 bg-dark-0"
+          }`}>
+          DE
+        </span>
+      </span>
+)
+};
 
 export const Resume = () => {
   const translation = useTranslation();
@@ -37,68 +97,27 @@ export const Resume = () => {
               useLinkComponent={true}
             />
             <div>
-              <span
-                className="mr-2 py-0.5 rounded-full text-dark-0 overflow-hidden
-            transition duration-300  hover:bg-black hover:ring-2 hover:ring-light-1 cursor-pointer"
-                onClick={translation.toggle}>
-                <span
-                  className={`text-dark-0 px-1.5 py-0.5 transition duration-300 rounded-l-full ${
-                    translation.isEnglish
-                      ? "bg-light-1"
-                      : "text-light-0 bg-dark-0"
-                  }`}>
-                  EN
-                </span>
-                <span
-                  className={`text-dark-0 px-1.5 py-0.5 transition duration-300 rounded-r-full ${
-                    translation.isGerman
-                      ? "bg-light-1"
-                      : "text-light-0 bg-dark-0"
-                  }`}>
-                  DE
-                </span>
-              </span>
-              {showDetails ? (
-                <span
-                  className="px-3 py-0.5 bg-light-1 rounded-full text-dark-0 hover:text-light-0
-            transition duration-300  hover:bg-black hover:ring-2 hover:ring-light-1 cursor-pointer"
-                  onClick={() => setShowDetails(false)}>
-                  Detail
-                </span>
-              ) : (
-                <span
-                  className="px-3 py-0.5 bg-dark-0 rounded-full text-light-0 hover:text-light-0
-            transition duration-300  hover:bg-black hover:ring-2 hover:ring-dark-0 cursor-pointer"
-                  onClick={() => setShowDetails(true)}>
-                  Detail
-                </span>
-              )}
-              {translation.isEnglish ? (
-                <a
-                  className="ml-2 px-3 py-0.5 bg-yellow-0 rounded-full
-              transition duration-300  hover:bg-black hover:ring-2 hover:ring-yellow-0"
-                  href="/RossAmiri.EN.pdf"
-                  target="_blank">
-                  Download
-                </a>
-              ) : (
-                <a
-                  className="ml-2 px-3 py-0.5 bg-yellow-0 rounded-full
-              transition duration-300  hover:bg-black hover:ring-2 hover:ring-yellow-0"
-                  href="/RossAmiri.DE.pdf"
-                  target="_blank">
-                  Download
-                </a>
-              )}
+              <ToggleLanguageBtn />
+              <DetailButton 
+                show={showDetails}
+                onClick={() => setShowDetails(state => !state)} 
+              />
+              <a
+                className="ml-2 px-3 py-0.5 bg-yellow-0 rounded-full transition duration-300  hover:bg-black hover:ring-2 hover:ring-yellow-0"
+                href={`/RossAmiri.${translation.isEnglish ? 'EN' : 'DE'}.pdf`}
+                target="_blank">
+                Download
+              </a>
             </div>
           </div>
         </div>
+
         <div className="px-5 print:!p-0 divide-y-2 divide-dark-0">
           <div className="pb-4 flex flex-col justify-between md:flex-row print:flex-row">
             <div>
-              <p className="print:text-4xl text-4xl font-bold">
+              <h1 className="print:text-4xl text-4xl font-bold">
                 Ross Amiri
-              </p>
+              </h1>
               <p className="print:text-2xl text-2xl">{aboutMe.title}</p>
             </div>
             <div className="flex flex-col print:text-sm whitespace-nowrap mt-5 md:mt-0 print:mt-0">
@@ -113,27 +132,7 @@ export const Resume = () => {
                   />
                 </div>
               ))}
-              <div className="flex flex-wrap">
-                {[
-                  "GitHub",
-                  "LinkedIn",
-                  "Instagram",
-                  "Twitter",
-                  "StackOverflow",
-                  "Telegram",
-                ].map((name) => (
-                  <LinkButtonName
-                    name={name}
-                    className={`px-3.5 py-0.5 font-bold print:text-light-0 ${
-                      name !== "Telegram" ? "mr-2" : ""
-                    }`}
-                    iconClassName={`text-light-0 ${
-                      name === "Telegram" ? "text-sm" : ""
-                    }`}
-                    useText={false}
-                  />
-                ))}
-              </div>
+              <ContactBox useIcon />
             </div>
           </div>
           <div className="py-4 print:text-sm">
@@ -217,52 +216,18 @@ export const Resume = () => {
                     </div>
                     <div className="mt-2 mb-2 text-justify">
                       {exp.about.map((line) => (
-                        <span> {line}</span>
+                        <span>{line}</span>
                       ))}
                     </div>
-                    {showDetails && exp.links?.length > 0 ? (
-                      <div className="flex flex-row flex-wrap">
-                        {exp.links.map((link) => (
-                          <LinkButton
-                            className="px-3 py-0.5 mx-1 my-1 font-bold print:text-light-0 print:text-sm print:px-2 print:py-0"
-                            bgColor="bg-blue-0"
-                            ringColor="ring-blue-0"
-                            href={link.href}
-                            text={link.title}
-                          />
-                        ))}
-                      </div>
-                    ) : null}
-                    {showDetails && exp.responsibilities?.length > 0 ? (
-                      <div className="mt-2 mb-2 print:text-sm text-justify">
-                        <p className="font-bold">{exp.responsible}</p>
-                        <ul className="list-disc pl-4">
-                          {exp.responsibilities.map((line) => (
-                            <li>{line}</li>
-                          ))}
-                        </ul>
-                      </div>
-                    ) : null}
-                    {showDetails && exp.contributions?.length > 0 ? (
-                      <div className="mt-2 mb-2 print:text-sm text-justify">
-                        <p className="font-bold">{exp.contribution}</p>
-                        <ul className="list-disc pl-4">
-                          {exp.contributions?.map((line) => (
-                            <li>{line}</li>
-                          ))}
-                        </ul>
-                      </div>
-                    ) : null}
-                    {showDetails && exp.achievements?.length > 0 ? (
-                      <div className="mt-2 mb-2 print:text-sm text-justify">
-                        <p className="font-bold">{exp.achievement}</p>
-                        <ul className="list-disc pl-4">
-                          {exp.achievements?.map((line) => (
-                            <li>{line}</li>
-                          ))}
-                        </ul>
-                      </div>
-                    ) : null}
+
+                    {showDetails && (
+                      <>
+                        <DetailComponent data={exp.links} isBtn/>
+                        <DetailComponent title={exp.responsible} data={exp.responsibilities} />
+                        <DetailComponent title={exp.contribution} data={exp.contributions} />
+                        <DetailComponent title={exp.achievement} data={exp.achievements} />
+                      </>
+                    )}
                   </div>
                 ))}
             </div>

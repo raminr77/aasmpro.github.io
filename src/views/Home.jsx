@@ -2,16 +2,18 @@ import React from "react";
 
 import { Hero } from "../components/Hero";
 import { LinkButtonName } from "../components/LinkButton";
+import { ContactBox } from "../components/ContactBox";
 
 export const Home = () => {
+  const linkClasses = "mx-2 px-2 text-dark-0 hover:text-light-0";
   return (
     <div className="overflow-x-hidden">
       <Hero />
       <div
         id="info"
         className="min-h-screen flex flex-col justify-center items-center">
-        <div className="sm:w-[500px] w-screen p-5 py-20 text-lg select-none">
-          <p className="mb-4">
+        <div className="sm:w-[500px] w-screen p-5 py-20 text-lg select-none flex flex-col gap-y-2">
+          <p>
             Hi! I'm a Team Leader & Web Developer, currently working as
             FullStack Developer at
             <LinkButtonName
@@ -22,40 +24,40 @@ export const Home = () => {
             , the world's largest feedback platform that aims to optimize the
             travel experience from the right hotel to the perfect stay.
           </p>
-          <p className="mb-4">
+          <p>
             Here is my
             <LinkButtonName
               name="Resume"
               useIcon={false}
-              className="mx-2 px-2 text-dark-0 hover:text-light-0"
+              className={linkClasses}
               useLinkComponent={true}
             />
             and
             <LinkButtonName
               name="Projects"
               useIcon={false}
-              className="mx-2 px-2 text-dark-0 hover:text-light-0"
+              className={linkClasses}
               useLinkComponent={true}
             />
             .
           </p>
-          <p className="mb-4">
+          <p>
             I am available to
             <LinkButtonName
               name="Talk"
               useIcon={false}
-              className="mx-2 px-2 text-dark-0 hover:text-light-0"
+              className={linkClasses}
             />
             /
             <LinkButtonName
               name="Chat"
               useIcon={false}
-              className="mx-2 px-2 text-dark-0 hover:text-light-0"
+              className={linkClasses}
             />
             about anything related to tech. it's always a pleasure to meet new
             people ;]
           </p>
-          <p>
+          <p className="mb-1">
             Join me to play
             <LinkButtonName
               name="Chess"
@@ -70,18 +72,7 @@ export const Home = () => {
             />
             .
           </p>
-          <div className="mt-5 flex flex-wrap gap-2 leading-snug">
-            {[
-              "GitHub",
-              "LinkedIn",
-              "Instagram",
-              "Twitter",
-              "StackOverflow",
-              "Telegram",
-            ].map((name) => (
-              <LinkButtonName name={name} useIcon={false} className="px-2" />
-            ))}
-          </div>
+          <ContactBox />
         </div>
       </div>
     </div>
