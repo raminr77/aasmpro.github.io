@@ -20,7 +20,6 @@ export const Char = (props) => {
       setChar((char) => (char !== "0" && char !== "1" ? randomChar() : char));
     }, Math.floor(Math.random() * 30000) + 2000);
     return () => clearInterval(interval);
-    // eslint-disable-next-line
   }, []);
 
   if (props.value) {
