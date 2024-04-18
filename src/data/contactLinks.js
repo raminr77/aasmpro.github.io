@@ -1,8 +1,8 @@
 export const contactLinks = [
-    "GitHub",
-    "LinkedIn",
-    "Instagram",
-    "Twitter",
-    "StackOverflow",
-    "Telegram"
+  'GitHub',
+  'LinkedIn',
+  'Instagram',
+  'Twitter',
+  'StackOverflow',
+  'Telegram'
 ];

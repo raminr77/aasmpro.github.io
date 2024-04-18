@@ -1,9 +1,10 @@
-@import "./fonts.jbm.css";
+@import './fonts.jbm.css';
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-html, body {
+html,
+body {
   scroll-behavior: smooth;
   background-color: #000;
 }
