@@ -1,5 +1,5 @@
 import React from 'react';
-import { contactLinks } from '../data/contactLinks';
+import { contactLinks } from 'data/contactLinks';
 import { LinkButtonName } from './LinkButton';
 
 export function ContactBox({ useIcon }) {

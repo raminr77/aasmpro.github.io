@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { translations } from '../data';
+import { translations } from 'data';
 
 const setLanguageStorage = (language) => {
   localStorage.setItem('language', language);

@@ -3,7 +3,7 @@ import { createRoot } from 'react-dom/client';
 
 // router
 import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom';
-import { ScrollToTop } from './utils/scrollToTop';
+import { ScrollToTop } from 'utils/scrollToTop';
 
 // views
 import { Home } from './views/Home';

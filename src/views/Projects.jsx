@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 
-import { DetailButton } from '../components/DetailButton';
-import { LinkButtonName } from '../components/LinkButton';
-import { ProjectItem } from '../components/ProjectItem';
-import { projects } from '../data';
+import { DetailButton } from 'components/DetailButton';
+import { LinkButtonName } from 'components/LinkButton';
+import { ProjectItem } from 'components/ProjectItem';
+import { projects } from 'data';
 
 export function Projects() {
   const [showDetails, setShowDetails] = useState(true);

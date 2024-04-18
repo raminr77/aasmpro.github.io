@@ -1,8 +1,8 @@
 import React from 'react';
 
-import { Hero } from '../components/Hero';
-import { LinkButtonName } from '../components/LinkButton';
-import { ContactBox } from '../components/ContactBox';
+import { Hero } from 'components/Hero';
+import { LinkButtonName } from 'components/LinkButton';
+import { ContactBox } from 'components/ContactBox';
 
 export function Home() {
   const linkClasses = 'mx-2 px-2 text-dark-0 hover:text-light-0';

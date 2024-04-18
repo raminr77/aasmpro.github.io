@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-import { Char, getCharsMatrix } from '../components/Char';
+import { Char, getCharsMatrix } from 'components/Char';
 
 const charsMatrix = getCharsMatrix(7, 9);
 

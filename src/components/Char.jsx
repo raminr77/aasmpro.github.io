@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { randomChar } from '../utils/randomChar';
+import { randomChar } from 'utils/randomChar';
 
 export function Char({ value }) {
   const [color, setColor] = useState('dark');

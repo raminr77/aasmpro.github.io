@@ -1,17 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
-import { LinkButtonName } from '../components/LinkButton';
-import { DetailButton } from '../components/DetailButton';
-import {
-  aboutMeTranslations,
-  experiencesTranslations,
-  skillsTranslations
-} from '../data';
-import { useTranslation } from '../utils/useTranslation';
-import { ContactBox } from '../components/ContactBox';
-import { ResumeDetailComponent } from '../components/ResumeDetailComponent';
-import { ResumeToggleLnaguageButton } from '../components/ResumeToggleLnaguageButton';
+import { LinkButtonName } from 'components/LinkButton';
+import { DetailButton } from 'components/DetailButton';
+import { aboutMeTranslations, experiencesTranslations, skillsTranslations } from 'data';
+import { useTranslation } from 'utils/useTranslation';
+import { ContactBox } from 'components/ContactBox';
+import { ResumeDetailComponent } from 'components/ResumeDetailComponent';
+import { ResumeToggleLnaguageButton } from 'components/ResumeToggleLnaguageButton';
 
 export function Resume() {
   const translation = useTranslation();
