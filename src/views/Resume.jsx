@@ -118,7 +118,7 @@ export const Resume = () => {
           </div>
           <div className="flex flex-col print:text-sm whitespace-nowrap mt-5 md:mt-0 print:mt-0">
             {["Webpage", "Email", "Phone"].map((name) => (
-              <div className="mb-2 print:mb-1.5">
+              <div key={name} className="mb-2 print:mb-1.5">
                 <LinkButtonName
                   name={name}
                   className={`block max-w-[295px] px-3 py-0.5 font-bold print:text-light-0 ${
@@ -136,16 +136,9 @@ export const Resume = () => {
             {translation.get("aboutMe")}
           </p>
           <div className="text-justify">
-            {aboutMe.cover.map((line) => (
-              <span> {line}</span>
+            {aboutMe.cover.map((line, index) => (
+              <span key={index}>{line}</span>
             ))}
-            {/* {showDetails ? (
-              <ul className="print:text-xs list-disc pl-4 pt-2 grid md:grid-cols-2 print:grid-cols-2">
-                {aboutMe.info.map((info) => (
-                  <li>{info}</li>
-                ))}
-              </ul>
-            ) : null} */}
           </div>
         </div>
         <div className="py-4 print:text-sm">
@@ -155,7 +148,7 @@ export const Resume = () => {
           <p className="mb-2">{skills.title}</p>
           <ul className="list-disc pl-4 grid sm:grid-cols-2 md:grid-cols-3 print:grid-cols-3">
             {skills.data.map((skill) => (
-              <li>{skill}</li>
+              <li key={skill}>{skill}</li>
             ))}
           </ul>
         </div>
@@ -166,8 +159,9 @@ export const Resume = () => {
           <div>
             {experiences
               .filter((exp) => exp.showExperiences)
-              .map((exp) => (
+              .map((exp, index) => (
                 <div
+                  key={index}
                   className={`py-2 first:pt-0 ${
                     exp.showExperiencesPrint ? "" : "print:hidden"
                   }`}>
@@ -191,8 +185,8 @@ export const Resume = () => {
                         </p>
                       </div>
                       <div className="print:text-xs text-sm">
-                        {exp.stack.map((stack) => (
-                          <span className="text-green-1 print:text-green-0 font-semibold">
+                        {exp.stack.map((stack, SIndex) => (
+                          <span key={index + '-' + SIndex} className="text-green-1 print:text-green-0 font-semibold">
                             {stack},{" "}
                           </span>
                         ))}
@@ -211,8 +205,8 @@ export const Resume = () => {
                     </div>
                   </div>
                   <div className="mt-2 mb-2 text-justify">
-                    {exp.about.map((line) => (
-                      <span>{line}</span>
+                    {exp.about.map((line, index) => (
+                      <span key={index}>{line}</span>
                     ))}
                   </div>
 

@@ -7,6 +7,7 @@ export function ContactBox({ useIcon }) {
         <div className="flex flex-wrap gap-2 leading-snug">
             {contactLinks.map((name) => (
                 <LinkButtonName
+                    key={name}
                     name={name}
                     useIcon={useIcon}
                     useText={!useIcon}

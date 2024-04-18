@@ -19,25 +19,24 @@ const values = [
   [" AASMPRO", "   TOO"],
 ];
 
-const length = values.length;
-
 export const Hero = () => {
   const [index, setIndex] = useState(0);
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setIndex((index) => (index < length - 1 ? index + 1 : 0));
+      setIndex((index) => (index < values.length - 1 ? index + 1 : 0));
     }, 4000);
     return () => clearInterval(interval);
-    // eslint-disable-next-line
   }, []);
 
   return (
     <div className="h-screen overflow-hidden flex justify-center items-center">
       <div className="flex-col justify-center items-center">
         {setCharsMatrix(charsMatrix, values[index], 16, 18, 26, 35).map(
-          (line) => (
-            <div className="whitespace-nowrap">{line.map((char) => char)}</div>
+          (line, index) => (
+            <div key={index} className="whitespace-nowrap">
+              {line.map((char, chIndex) => <React.Fragment key={`${index}-${chIndex}`}>{char}</React.Fragment>)}
+            </div>
           )
         )}
       </div>

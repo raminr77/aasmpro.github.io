@@ -1,19 +1,18 @@
 import React, { useState, useEffect } from "react";
 import { randomChar } from "../utils/randomChar";
 
-export const Char = (props) => {
-  const [color, setColor] = useState("text-dark-0");
+export const Char = ({ value }) => {
+  const [color, setColor] = useState("dark");
   const [char, setChar] = useState(randomChar());
 
   const changeColor = () => {
+    if (value) return;
     if (char === "0" || char === "1") {
-      if (color === "text-red-0") {
-        setColor("text-dark-0");
-      } else {
-        setColor("text-red-0");
-      }
+        setColor(color === "red" ? "dark" : "red");
     }
   };
+
+  const classes = `select-none px-2 text-2xl font-bold text-${value ? 'light' : color}-0`;
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -22,29 +21,22 @@ export const Char = (props) => {
     return () => clearInterval(interval);
   }, []);
 
-  if (props.value) {
-    if (props.value === "↓") {
-      return (
-        <a href="#info" title="scroll down!">
-          <span className="select-none px-2 text-2xl font-bold text-light-0 mr-3.5">
-            <span className="animate-bounce absolute mt-1">{props.value}</span>
-          </span>
-        </a>
-      );
-    }
+  if (value === "↓") {
     return (
-      <span className="select-none px-2 text-2xl font-bold text-light-0">
-        {props.value}
-      </span>
+      <a href="#info" title="Scroll Down!">
+        <span className={classes}>
+          <span className="animate-bounce absolute mt-1 mr-3.5">{value}</span>
+        </span>
+      </a>
     );
   }
 
   return (
-    <span
-      className={`select-none px-2 text-2xl font-bold ${color}`}
+    <button
+      className={classes}
       onClick={changeColor}>
-      {char}
-    </span>
+      {value || char}
+    </button>
   );
 };
 
