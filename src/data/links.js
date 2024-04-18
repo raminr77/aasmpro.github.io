@@ -10,7 +10,7 @@ export const links = {
   Resume: {
     title: "Resume",
     text: "Resume",
-    href: "/#resume",
+    href: "/resume/",
     icon: "",
     bgColor: "bg-light-1",
     ringColor: "ring-light-1",
@@ -18,7 +18,7 @@ export const links = {
   Projects: {
     title: "Projects",
     text: "Projects",
-    href: "/#projects",
+    href: "/projects/",
     icon: "",
     bgColor: "bg-light-1",
     ringColor: "ring-light-1",

@@ -1,3 +1,5 @@
+import React from 'react';
+
 export function DetailButton({ onClick, show }) {
     return (
         <button
