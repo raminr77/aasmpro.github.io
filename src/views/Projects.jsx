@@ -5,7 +5,7 @@ import { LinkButtonName } from '../components/LinkButton';
 import { ProjectItem } from '../components/ProjectItem';
 import { projects } from '../data';
 
-export const Projects = () => {
+export function Projects() {
   const [showDetails, setShowDetails] = useState(true);
 
   return (
@@ -15,7 +15,7 @@ export const Projects = () => {
         <LinkButtonName
           name='Home'
           useIcon={false}
-          useLinkComponent={true}
+          useLinkComponent
           className='px-3 py-0.5 text-dark-0 hover:text-light-0'
         />
         <DetailButton
@@ -29,10 +29,17 @@ export const Projects = () => {
         {projects
           .filter((item) => item.showProjects)
           .sort((a, b) => b.orderProjects - a.orderProjects)
-          .map((proItem, index) => (
-            <ProjectItem key={index} {...proItem} details={showDetails} />
+          .map(({ title, links = [], stack = [], about = [] }, index) => (
+            <ProjectItem
+              key={index}
+              title={title}
+              links={links}
+              stack={stack}
+              about={about}
+              details={showDetails}
+            />
           ))}
       </div>
     </div>
   );
-};
+}

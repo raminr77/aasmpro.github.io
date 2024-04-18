@@ -1,9 +1,10 @@
+/* eslint-disable */
 import React from 'react';
 
 import { Link } from 'react-router-dom';
 import { links } from '../data';
 
-export const LinkButton = ({
+export function LinkButton({
   className,
   href,
   title,
@@ -15,7 +16,7 @@ export const LinkButton = ({
   bgColor,
   ringColor,
   useLinkComponent = false
-}) => {
+}) {
   if (useLinkComponent) {
     return (
       <Link
@@ -40,9 +41,9 @@ export const LinkButton = ({
       {text && useText ? text : null}
     </a>
   );
-};
+}
 
-export const LinkButtonName = ({
+export function LinkButtonName({
   name,
   className,
   iconClassName,
@@ -51,7 +52,7 @@ export const LinkButtonName = ({
   useText = true,
   useIcon = true,
   useLinkComponent = false
-}) => {
+}) {
   return (
     <LinkButton
       {...links[name]}
@@ -64,4 +65,4 @@ export const LinkButtonName = ({
       useLinkComponent={useLinkComponent}
     />
   );
-};
+}

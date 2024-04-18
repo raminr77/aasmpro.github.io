@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 import { Char, getCharsMatrix } from '../components/Char';
 
-let charsMatrix = getCharsMatrix(7, 9);
+const charsMatrix = getCharsMatrix(7, 9);
 
 charsMatrix[2][3] = <Char value='4' />;
 charsMatrix[2][4] = <Char value='0' />;
@@ -19,16 +19,16 @@ charsMatrix[4][4] = <Char value='U' />;
 charsMatrix[4][5] = <Char value='N' />;
 charsMatrix[4][6] = <Char value='D' />;
 
-export const NotFound = () => {
+export function NotFound() {
   return (
     <div className='h-screen overflow-hidden flex flex-col justify-center items-center'>
       <Link to='/' title="Let's Go Home!">
         <div className='flex-col justify-center items-center'>
-          {charsMatrix.map((line) => (
-            <div>{line.map((char) => char)}</div>
+          {charsMatrix.map((line, charIndex) => (
+            <div key={charIndex}>{line.map((char) => char)}</div>
           ))}
         </div>
       </Link>
     </div>
   );
-};
+}

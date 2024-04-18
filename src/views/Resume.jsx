@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
-import { LinkButtonName, LinkButton } from '../components/LinkButton';
+import { LinkButtonName } from '../components/LinkButton';
 import { DetailButton } from '../components/DetailButton';
 import {
   aboutMeTranslations,
@@ -10,63 +10,10 @@ import {
 } from '../data';
 import { useTranslation } from '../utils/useTranslation';
 import { ContactBox } from '../components/ContactBox';
+import { ResumeDetailComponent } from '../components/ResumeDetailComponent';
+import { ResumeToggleLnaguageButton } from '../components/ResumeToggleLnaguageButton';
 
-const DetailComponent = ({ title, data = [], isBtn }) => {
-  if (!data?.length) return null;
-  if (isBtn) {
-    return (
-      <div className='flex flex-row flex-wrap'>
-        {data.map(({ href, title }, index) => (
-          <LinkButton
-            key={title + index}
-            className='px-3 py-0.5 mx-1 my-1 font-bold print:text-light-0 print:text-sm print:px-2 print:py-0'
-            bgColor='bg-blue-0'
-            ringColor='ring-blue-0'
-            href={href}
-            text={title}
-          />
-        ))}
-      </div>
-    );
-  }
-  return (
-    <div className='mt-2 mb-2 print:text-sm text-justify'>
-      <p className='font-bold'>{title}</p>
-      <ul className='list-disc pl-4'>
-        {data.map((item, index) => (
-          <li key={index}>{item}</li>
-        ))}
-      </ul>
-    </div>
-  );
-};
-
-const ToggleLanguageBtn = ({ translation }) => {
-  return (
-    <span
-      className='mr-2 py-0.5 rounded-full text-dark-0 overflow-hidden
-    transition duration-300  hover:bg-black hover:ring-2 hover:ring-light-1 cursor-pointer'
-      onClick={translation.toggle}
-    >
-      <span
-        className={`text-dark-0 px-1.5 py-0.5 transition duration-300 rounded-l-full ${
-          translation.isEnglish ? 'bg-light-1' : 'text-light-0 bg-dark-0'
-        }`}
-      >
-        EN
-      </span>
-      <span
-        className={`text-dark-0 px-1.5 py-0.5 transition duration-300 rounded-r-full ${
-          translation.isGerman ? 'bg-light-1' : 'text-light-0 bg-dark-0'
-        }`}
-      >
-        DE
-      </span>
-    </span>
-  );
-};
-
-export const Resume = () => {
+export function Resume() {
   const translation = useTranslation();
   const [showDetails, setShowDetails] = useState(true);
   const [aboutMe, setAboutMe] = useState(translation.get(aboutMeTranslations));
@@ -90,10 +37,10 @@ export const Resume = () => {
           title={translation.get('Home')}
           useIcon={false}
           className='px-3 py-0.5 text-dark-0 hover:text-light-0'
-          useLinkComponent={true}
+          useLinkComponent
         />
         <div>
-          <ToggleLanguageBtn translation={translation} />
+          <ResumeToggleLnaguageButton translation={translation} />
           <DetailButton
             show={showDetails}
             onClick={() => setShowDetails((state) => !state)}
@@ -178,9 +125,9 @@ export const Resume = () => {
                         <p className='print:text-xs text-sm font-semibold'>{exp.type}</p>
                       </div>
                       <div className='print:text-xs text-sm'>
-                        {exp.stack.map((stack, SIndex) => (
+                        {exp.stack.map((stack, stackIndex) => (
                           <span
-                            key={index + '-' + SIndex}
+                            key={`${index}-${stackIndex}`}
                             className='text-green-1 print:text-green-0 font-semibold'
                           >
                             {stack},{' '}
@@ -199,23 +146,26 @@ export const Resume = () => {
                     </div>
                   </div>
                   <div className='mt-2 mb-2 text-justify'>
-                    {exp.about.map((line, index) => (
-                      <span key={index}>{line}</span>
+                    {exp.about.map((line, aboutIndex) => (
+                      <span key={`${index}-${aboutIndex}`}>{line}</span>
                     ))}
                   </div>
 
                   {showDetails && (
                     <>
-                      <DetailComponent data={exp.links} isBtn />
-                      <DetailComponent
+                      <ResumeDetailComponent data={exp.links} isBtn />
+                      <ResumeDetailComponent
                         title={exp.responsible}
                         data={exp.responsibilities}
                       />
-                      <DetailComponent
+                      <ResumeDetailComponent
                         title={exp.contribution}
                         data={exp.contributions}
                       />
-                      <DetailComponent title={exp.achievement} data={exp.achievements} />
+                      <ResumeDetailComponent
+                        title={exp.achievement}
+                        data={exp.achievements}
+                      />
                     </>
                   )}
                 </div>
@@ -225,4 +175,4 @@ export const Resume = () => {
       </div>
     </div>
   );
-};
+}

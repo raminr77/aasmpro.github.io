@@ -4,6 +4,7 @@ import { experiencesEN } from './experiencesEN';
 import { experiencesDE } from './experiencesDE';
 import { skillsEN } from './skillsEN';
 import { skillsDE } from './skillsDE';
+
 export { projects } from './projects';
 export { translations } from './translations';
 export { links } from './links';

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { randomChar } from '../utils/randomChar';
 
-export const Char = ({ value }) => {
+export function Char({ value }) {
   const [color, setColor] = useState('dark');
   const [char, setChar] = useState(randomChar());
 
@@ -17,9 +17,11 @@ export const Char = ({ value }) => {
   useEffect(() => {
     const interval = setInterval(
       () => {
-        setChar((char) => (char !== '0' && char !== '1' ? randomChar() : char));
+        setChar((currentChar) =>
+          currentChar !== '0' && currentChar !== '1' ? randomChar() : currentChar
+        );
       },
-      Math.floor(Math.random() * 30000) + 2000
+      Math.floor(Math.random() * 30_000) + 2000
     );
     return () => clearInterval(interval);
   }, []);
@@ -35,40 +37,34 @@ export const Char = ({ value }) => {
   }
 
   return (
-    <button className={classes} onClick={changeColor}>
+    <button type='button' className={classes} onClick={changeColor}>
       {value || char}
     </button>
   );
-};
+}
 
 export const getCharsMatrix = (row, col) => {
-  let charsMatrix = [];
-  for (var i = 0; i < row; i++) {
-    let _row = [];
-    for (var j = 0; j < col; j++) {
-      _row.push(<Char />);
+  const charsMatrix = [];
+  for (let index = 0; index < row; index++) {
+    const matrixRow = [];
+    for (let insideIndex = 0; insideIndex < col; insideIndex++) {
+      matrixRow.push(<Char />);
     }
-    charsMatrix.push(_row);
+    charsMatrix.push(matrixRow);
   }
   return charsMatrix;
 };
 
-export const setCharsMatrix = (
-  charsMatrix,
-  values,
-  from_row,
-  to_row,
-  from_col,
-  to_col
-) => {
-  for (var i = from_row; i < to_row; i++) {
-    for (var j = from_col; j < to_col; j++) {
+export const setCharsMatrix = (charsMatrix, values, fromRow, toRow, fromCol, toCol) => {
+  for (let index = fromRow; index < toRow; index++) {
+    for (let insideIndex = fromCol; insideIndex < toCol; insideIndex++) {
       let char = null;
       try {
-        char = values[i - from_row][j - from_col];
+        char = values[index - fromRow][insideIndex - fromCol];
       } catch {}
       try {
-        charsMatrix[i][j] = char && char !== ' ' ? <Char value={char} /> : <Char />;
+        charsMatrix[index][insideIndex] =
+          char && char !== ' ' ? <Char value={char} /> : <Char />;
       } catch {}
     }
   }
