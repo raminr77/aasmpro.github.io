@@ -16,7 +16,7 @@
     "deploy": "yarn run build:css && yarn run build && gh-pages -d build",
     "gh-pages": "gh-pages -d build",
     "lint": "eslint --fix src/**/*.{js,jsx}",
-    "pretty": "prettier --write \"src/**/*.{js,jsx,css,scss}\"",
+    "pretty": "prettier --write \"src/**/*.{js,jsx}\"",
     "prepare": "husky"
   },
   "eslintConfig": {
@@ -29,7 +29,7 @@
       "prettier --write",
       "eslint --fix"
     ],
-    "src/**/*.{json,css,scss}": "prettier --write"
+    "src/**/*.{js,jsx,json}": "prettier --write"
   },
   "browserslist": {
     "production": [
