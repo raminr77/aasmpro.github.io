@@ -1,0 +1,8 @@
+The Project TODO
+
+- Add Commit-lint config
+- Refactor the Resume file
+- Add Style-lint [Optional]
+- Refactor the LinkButton file
+- Remove Tailwind comand (I am not sure about it)
+- Split Char file to the helper and component file

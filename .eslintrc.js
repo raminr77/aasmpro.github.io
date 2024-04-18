@@ -12,9 +12,7 @@ module.exports = {
     'plugin:react/recommended',
     'plugin:prettier/recommended',
     'plugin:react-hooks/recommended',
-    'plugin:@typescript-eslint/recommended'
   ],
-  parser: '@typescript-eslint/parser',
   parserOptions: {
     ecmaFeatures: {
       jsx: true
@@ -41,12 +39,12 @@ module.exports = {
     'consistent-return': 'warn',
     'react/no-multi-comp': 'off',
     'react/jsx-uses-react': 'off',
+    'import/no-unresolved': 'off',
     'no-extra-boolean-cast': 'off',
     'no-restricted-exports': 'off',
     'unicorn/prefer-spread': 'off',
     'unicorn/filename-case': 'off',
     'prettier/prettier': ['error'],
-    'import/no-unresolved': 'error',
     'unicorn/no-array-reduce': 'off',
     'no-underscore-dangle': ['error'],
     'unicorn/prefer-node-protocol': 0,
